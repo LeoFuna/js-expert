@@ -2,7 +2,8 @@
 
 ### Call Stack
 - Aqui que os dados primitivos são armezenados.
-- Armazena dados de endereço no Memory Heap
+- Armazena dados de endereço no Memory Heap.
+- Ajuda a acompanhar onde estamos no código, linha por linha, para rodar o código em ordem.
 - First in Last Out.
 
 ```js
@@ -26,3 +27,6 @@ console.log(number2); // Resultado: 1
 ![Como funciona a call stack com memory heap](image.png)
 ### Referências
 - https://levelup.gitconnected.com/understanding-call-stack-and-heap-memory-in-js-e34bf8d3c3a4
+- https://medium.com/@allansendagi/javascript-fundamentals-call-stack-and-memory-heap-401eb8713204
+- https://www.mattzeunert.com/2017/03/29/v8-object-size.html
+- https://developer.mozilla.org/en-US/docs/Glossary/Primitive
