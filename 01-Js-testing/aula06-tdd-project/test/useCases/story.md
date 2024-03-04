@@ -19,7 +19,7 @@ Then the final formula will be `((price per day * Tax) * number of days)`
 And the final result will be `((37.6 * 1.3) * 5)= 244.4`
 And the final price will be printed in Brazilian Portuguese format as "R$ 244,40"
 
-## Use Case 03
+## Use Case 03 - Renting without discount ticket
 
 As a system user
 In order to register a renting transaction
@@ -29,5 +29,19 @@ And a delivery date that is for 05 days behind
 And given an actual date 05/11/2020
 When I rent a car I should see the customer data
 And the car selected
-And the final price which will be R$ 244,40
+And the final price which will be R$ 206,80
+And DueDate which will be printed in Brazilian Portuguese format "10 de Novembro de 2020"
+
+## Use Case 04 - Using discount ticket
+
+As a system user
+In order to register a renting transaction
+Given a registered customer who is 20 years old
+And a car model that costs $37.6 per day
+And a delivery date that is for 05 days behind
+And using a 10% discount ticket 
+And given an actual date 05/11/2020
+When I rent a car I should see the customer data
+And the car selected
+And the final price which will be R$ 186,12
 And DueDate which will be printed in Brazilian Portuguese format "10 de Novembro de 2020"

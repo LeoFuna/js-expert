@@ -108,7 +108,7 @@ describe('CarService Suite Tests', () => {
     expect(result).to.be.deep.equal(expected);
   })
 
-  it('given a customer and a category it should return a transaction receipt', async () => {
+  it('given a customer and a category with no discount ticket, it should return a transaction receipt', async () => {
     const car = mocks.validCar
     const carCategory = {
       ...mocks.validCarCategory,
@@ -123,23 +123,67 @@ describe('CarService Suite Tests', () => {
 
     const numberOfDays = 5
     const today = new Date(2020, 10, 5)
+
     sandbox.useFakeTimers(today.getTime())
 
     sandbox.stub(
       carService.carRepository,
       carService.carRepository.find.name,
     ).resolves(car)
-
+    // price * tax * numberOfDays * discount
     const expectedAmount = carService.currencyFormat.format(206.80)
     const result = await carService.rent(
       customer,
       carCategory,
-      numberOfDays
+      numberOfDays,
     )
 
     const expected = new Transaction({
       customer,
       car,
+      amount: expectedAmount,
+      dueDate
+    })
+
+    expect(result).to.be.deep.equal(expected)
+  })
+
+  it('given a customer and a category with 10% discount ticket, it should return a transaction receipt', async () => {
+    const car = mocks.validCar
+    const carCategory = {
+      ...mocks.validCarCategory,
+      price: 37.6,
+      carIds: [car.id]
+    }
+
+    const customer = Object.create(mocks.validCustomer)
+    customer.age = 20
+
+    const dueDate = '10 de novembro de 2020'
+
+    const numberOfDays = 5
+    const today = new Date(2020, 10, 5)
+    // 10% discount
+    const discountTicket = 0.1;
+    sandbox.useFakeTimers(today.getTime())
+
+    sandbox.stub(
+      carService.carRepository,
+      carService.carRepository.find.name,
+    ).resolves(car)
+    // price * tax * numberOfDays * discount
+    const expectedAmount = carService.currencyFormat.format(186.12)
+    const result = await carService.rent(
+      customer,
+      carCategory,
+      numberOfDays,
+      discountTicket
+    )
+
+    const expected = new Transaction({
+      customer,
+      car,
+      discount: discountTicket,
       amount: expectedAmount,
       dueDate
     })

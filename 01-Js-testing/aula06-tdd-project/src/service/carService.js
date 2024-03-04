@@ -31,12 +31,13 @@ class CarService {
     return carCategory.carIds[randomCarIndex];
   }
 
-  calculateFinalPrice( customer,carCategory, numberOfDays) {
+  calculateFinalPrice(customer, carCategory, numberOfDays, discount = 0) {
     const { age } = customer;
     const price = carCategory.price;
     const { then: tax } = this.taxesBasedOnAge.find(tax => age >= tax.from && age <= tax.to );
 
-    const finalPrice = (tax * price) * numberOfDays;
+    const finalPrice = (tax * price) * numberOfDays * (1 - discount);
+
     const formattedPrice = this.currencyFormat.format(finalPrice);
 
     return formattedPrice
@@ -45,10 +46,11 @@ class CarService {
   async rent(
     customer,
     carCategory,
-    numberOfDays
+    numberOfDays,
+    discount = 0,
   ) {
     const car = await this.getAvailableCar(carCategory)
-    const finalPrice = this.calculateFinalPrice(customer, carCategory, numberOfDays)
+    const finalPrice = this.calculateFinalPrice(customer, carCategory, numberOfDays, discount)
 
     const today = new Date();
     today.setDate(today.getDate() + numberOfDays);
@@ -64,7 +66,8 @@ class CarService {
       customer,
       car,
       amount: finalPrice,
-      dueDate
+      dueDate,
+      discount,
     })
 
     return transaction
