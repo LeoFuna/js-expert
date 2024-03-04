@@ -3,6 +3,8 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 const CarService = require('../../src/service/carService');
 const { join } = require('path');
+const Transaction = require('../../src/entities/transaction');
+const exp = require('constants');
 
 const carsDatabase = join(__dirname, './../../database', 'cars.json')
 
@@ -79,5 +81,69 @@ describe('CarService Suite Tests', () => {
     expect(carService.chooseRandomCar.calledWithExactly(carCategory)).to.be.ok;
     expect(carService.carRepository.find.calledOnce).to.be.ok;
     expect(carService.carRepository.find.calledWithExactly(car.id)).to.be.ok;
+  })
+
+  it('given a carCtegory, customer and numberOfDays it should calculate final amount in real', async () => {
+    const customer = Object.create(mocks.validCustomer)
+    customer.age = 50;
+
+    const carCategory = Object.create(mocks.validCarCategory)
+    carCategory.price = 37.6;
+
+    const numberOfDays = 5;
+    // para nao depender de dados externos
+    sandbox.stub(
+      carService,
+      "taxesBasedOnAge",
+    ).get(() => [{ from: 40, to: 50, then: 1.3 }])
+
+    const expected = carService.currencyFormat.format(244.40);
+
+    const result = carService.calculateFinalPrice(
+      customer,
+      carCategory,
+      numberOfDays
+    )
+
+    expect(result).to.be.deep.equal(expected);
+  })
+
+  it('given a customer and a category it should return a transaction receipt', async () => {
+    const car = mocks.validCar
+    const carCategory = {
+      ...mocks.validCarCategory,
+      price: 37.6,
+      carIds: [car.id]
+    }
+
+    const customer = Object.create(mocks.validCustomer)
+    customer.age = 20
+
+    const dueDate = '10 de novembro de 2020'
+
+    const numberOfDays = 5
+    const today = new Date(2020, 10, 5)
+    sandbox.useFakeTimers(today.getTime())
+
+    sandbox.stub(
+      carService.carRepository,
+      carService.carRepository.find.name,
+    ).resolves(car)
+
+    const expectedAmount = carService.currencyFormat.format(206.80)
+    const result = await carService.rent(
+      customer,
+      carCategory,
+      numberOfDays
+    )
+
+    const expected = new Transaction({
+      customer,
+      car,
+      amount: expectedAmount,
+      dueDate
+    })
+
+    expect(result).to.be.deep.equal(expected)
   })
 })
