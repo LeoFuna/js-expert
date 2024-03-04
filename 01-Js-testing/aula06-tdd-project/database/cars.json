@@ -1,0 +1,23 @@
+[
+  {
+    "id": "a247427a-f6a5-48b5-84a9-3a71860e4c15",
+    "name": "A8",
+    "releaseYear": 2023,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "33976653-08b4-402c-9d42-65956c7a9213",
+    "name": "F-150",
+    "releaseYear": 2023,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "e2b5c9ff-765b-48b2-a3b3-d2312f440be4",
+    "name": "Durango",
+    "releaseYear": 2023,
+    "available": true,
+    "gasAvailable": true
+  }
+]

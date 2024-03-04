@@ -6,6 +6,7 @@ class Customer extends Base {
     
     this.age = age
   }
+
 }
 
 module.exports = Customer;
