@@ -8,3 +8,6 @@ Se aprofundar nos estudos da linguagem javascript, para tirar a certificação [
 
 ### Como será feito?
 Utlizando como base inicial o curso do [Erick Wendel](https://www.linkedin.com/in/erickwendel/) e utilizando materiais auxiliares através da internet.
+
+Outros materiais de apoio: 
+- https://courses.dwf.dev/docs/javascript/jsnad-course-notes
