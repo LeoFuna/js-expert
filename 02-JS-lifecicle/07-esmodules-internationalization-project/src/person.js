@@ -30,5 +30,17 @@ export default class Person {
         .format(mapDate(this.to))
     }
   }
+
+  static generateInstaceFromString(text) {
+    const EMPTY_SPACE = ' '
+    const [id, vehicles, kmTraveled, from, to] = text.split(EMPTY_SPACE)
+    return new Person({
+      id,
+      vehicles: vehicles.split(','),
+      kmTraveled,
+      from,
+      to,
+    }) 
+  }
 }
  
