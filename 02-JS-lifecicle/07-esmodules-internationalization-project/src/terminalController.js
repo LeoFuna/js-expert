@@ -6,17 +6,17 @@ import DraftLog from 'draftlog'
 import Person from './person.js'
 
 export default class TerminalController {
-  constructor() {
-    this.print = {}
-    this.data = {}
-    this.terminal = {}
-  }
+  #print = {};
+  #terminal = {};
+  #data = {};
+  
+  constructor() {}
   
   question(msg = '') {
-    return new Promise(resolve => this.terminal.question(msg, resolve))
+    return new Promise(resolve => this.#terminal.question(msg, resolve))
   }
 
-  getTableOptions() {
+  #getTableOptions() {
     return {
       leftPad: 2,
       columns: [
@@ -29,29 +29,44 @@ export default class TerminalController {
     }
   }
 
-  initializeTable(database, language) {
+  #initializeTable(database, language) {
     const data = database.map(item => new Person(item).formatted(language));
-    const options = this.getTableOptions();
+    const options = this.#getTableOptions();
     const table = chalkTable(
       options,
       data
     );
-    this.print = console.draft(table)
-    this.data = data
+    this.#print = console.draft(table)
+    this.#data = data
+  }
+
+  updateTable(item) {
+    this.#data.push(item)
+    this.#print(chalkTable(this.#getTableOptions(), this.#data))
   }
 
   initializeTerminal(database, language) {
     DraftLog(console).addLineListener(process.stdin)
-    this.terminal = readline.createInterface({
+    this.#terminal = readline.createInterface({
       input: process.stdin,
       output: process.stdout
     })
 
-    this.initializeTable(database, language)
+    this.#initializeTable(database, language)
   }
 
   closeTerminal() {
-    this.terminal.close()
+    this.#terminal.close()
+  }
+
+  getTerminal() {
+    return this.#terminal;
+  }
+  getData() {
+    return this.#data;
+  }
+  getPrint() {
+    return this.#print;
   }
 }
  
