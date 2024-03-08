@@ -4,12 +4,11 @@ import chalkTable from 'chalk-table'
 import DraftLog from 'draftlog'
 
 export default class TerminalController {
-  /* c8 ignore next */
-  _print = () => null;
-  _terminal = {};
-  _data = [];
-  
   constructor({ Person }) {
+    /* c8 ignore next */
+    this._print = () => {};
+    this._terminal = {};
+    this._data = [];
     this._Person = Person;
   }
   
