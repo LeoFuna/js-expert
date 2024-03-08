@@ -3,20 +3,21 @@ import chalk from 'chalk'
 import chalkTable from 'chalk-table'
 import DraftLog from 'draftlog'
 
-import Person from './person.js'
-
 export default class TerminalController {
-  #print = {};
-  #terminal = {};
-  #data = {};
+  /* c8 ignore next */
+  _print = () => null;
+  _terminal = {};
+  _data = [];
   
-  constructor() {}
+  constructor({ Person }) {
+    this._Person = Person;
+  }
   
   question(msg = '') {
-    return new Promise(resolve => this.#terminal.question(msg, resolve))
+    return new Promise(resolve => this._terminal.question(msg, resolve))
   }
 
-  #getTableOptions() {
+  _getTableOptions() {
     return {
       leftPad: 2,
       columns: [
@@ -29,44 +30,35 @@ export default class TerminalController {
     }
   }
 
-  #initializeTable(database, language) {
-    const data = database.map(item => new Person(item).formatted(language));
-    const options = this.#getTableOptions();
+  _initializeTable(database, language) {
+    const data = database.map(item => new this._Person(item).formatted(language));
+    const options = this._getTableOptions();
     const table = chalkTable(
       options,
       data
     );
-    this.#print = console.draft(table)
-    this.#data = data
+
+    this._print = console.draft(table)
+    this._data = data
   }
 
   updateTable(item) {
-    this.#data.push(item)
-    this.#print(chalkTable(this.#getTableOptions(), this.#data))
+    this._data.push(item)
+    this._print(chalkTable(this._getTableOptions(), this._data))
   }
 
   initializeTerminal(database, language) {
     DraftLog(console).addLineListener(process.stdin)
-    this.#terminal = readline.createInterface({
+    this._terminal = readline.createInterface({
       input: process.stdin,
       output: process.stdout
     })
 
-    this.#initializeTable(database, language)
+    this._initializeTable(database, language)
   }
 
   closeTerminal() {
-    this.#terminal.close()
-  }
-
-  getTerminal() {
-    return this.#terminal;
-  }
-  getData() {
-    return this.#data;
-  }
-  getPrint() {
-    return this.#print;
+    return this._terminal.close()
   }
 }
  

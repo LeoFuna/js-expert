@@ -9,7 +9,7 @@ import TerminalController from './terminalController.js'
 const DEFAULT_LANG = 'en'
 const STOP_TERMINAL = ":q"
 
-const terminalController = new TerminalController();
+const terminalController = new TerminalController({ Person });
 terminalController.initializeTerminal(database, DEFAULT_LANG)
 
 async function mainLoop() {
@@ -23,7 +23,6 @@ async function mainLoop() {
     const person = Person.generateInstaceFromString(answer)
     terminalController.updateTable(person.formatted(DEFAULT_LANG));
     save(person)
-    // terminalController.initializeTable(database, answer)
     return mainLoop()
   } catch (error) {
     console.error(error)
