@@ -4,7 +4,17 @@
 
 - Map é um tipo de coleção de dados (de um jeito mais "bonito",  tipo de estrutura de dados abstrata), que é armazenado em forma de pares, que copntem chaves unicas que sao mapeadas por essa chave
 . Por conta disso, não existe duplicidade de pares guardados.
+- Podem ter chaves de qualquer tipo, preservando o tipo da chave.
+- É iterável
 
+### WeakMap
+- Só aceita como chaves de referencia fraca.
+- Grande diferença é que ele permite que o garbage collector limpe as chaves, previnido leak de memoria
+
+### Objeto
+- Objeto regular no js é um tipo de dicionário de coleta de dados, também sao baseados em chave-valor.
+- Só é possivel ter chaves como strings ou Symbols (number sao convertidos para string)
+- Isso pode ser ruim em casos de perda de consistencia de tipos.
 
 ### Referencias
 
