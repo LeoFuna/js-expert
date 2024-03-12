@@ -16,6 +16,29 @@
 - Só é possivel ter chaves como strings ou Symbols (number sao convertidos para string)
 - Isso pode ser ruim em casos de perda de consistencia de tipos.
 
+### Resumo
+Feature--------------Map--------------WeakMap
+---------------------------------------------
+Key type-------------Any--------------Object-only
+Key reference--------Strong-----------Weak
+Garbage collection*--No---------------Yes
+Iteration order-------Insertion----------N/A
+Size property--------Yes---------------No
+Performance---------Slower-----------Faster
+
+
+Methods-------------Map--------------WeakMap
+---------------------------------------------
+set(key, value)------Yes-----------------Yes
+get(key)-------------Yes----------------Yes
+has(key)-------------Yes----------------Yes
+delete(key)----------Yes----------------Yes
+clear()---------------Yes----------------Yes
+entries()-------------Yes----------------No
+forEach(callback)----Yes----------------No
+keys()----------------Yes----------------No
+values()--------------Yes----------------No
+
 ### Referencias
 
 - https://medium.com/front-end-weekly/es6-map-vs-object-what-and-when-b80621932373
