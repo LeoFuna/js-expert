@@ -1,0 +1,33 @@
+// regex101
+^\d{3}.\d{3}.\d{3}-\d{2}$
+
+123.123.123-14
+321.321.321-31
+456.456.456-56
+
+// colchetes seria um ou
+replace [.-] - vazio
+
+
+
+Wendel, Erick
+Funa, Leo
+Mathielo, Hio
+
+// os () foram grupos que sao acessados pelo $1/$2 etc
+// o + vai pegar todas as letras até que encontre caracter sem ser letra
+// ^ é uma pratica interessante se vc sabe que se trata do inicio da palavra
+// $ no fim é uma boa pratica pois faz com que ele nao fique procurando em outras linhas
+
+replace: ^(\w+),\s(\w+)$ por
+{firstName: "$2", lastName "$1"}
+
+
+O [Leonardo Funabashi](https://leofuna.com) faz sistemas web portanto siga ele em [Github](http://github/LeoFuna)
+
+Ah e pode pesquisar no [Google](https://google.com) ou em [Yahoo](https://yahoo.com)
+
+vai que vai!
+
+replace: \[(.*?)\]\(([https|http].*?)\) por
+<a href="$2">$1</a>
