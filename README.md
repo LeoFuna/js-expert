@@ -6,6 +6,7 @@ Se aprofundar nos estudos da linguagem javascript, para tirar a certificação [
 ![image](https://github.com/LeoFuna/js-expert/assets/80538553/d2467381-cb38-43f3-b2e5-f403f5291ec8)
 
 
+
 ### Como será feito?
 Utlizando como base inicial o curso do [Erick Wendel](https://www.linkedin.com/in/erickwendel/) e utilizando materiais auxiliares através da internet.
 
