@@ -1,3 +1,4 @@
+const Person = require('./person')
 const { evaluateRegex } = require('./utils')
 // O objetivo do Fluent API é executar tarefas como um pipeline, step by step
 // e no fim, chama o build. Muito similar ao padrão Builder
@@ -38,6 +39,11 @@ class TextProcessorFluentAPI {
     removeEmptyCharacters() {
         const removeEmpty = evaluateRegex(/^\s+|\s+$|\n/g)
         this.#content = this.#content.map(columns => columns.map(column => column.replace(removeEmpty, '')))
+        return this
+    }
+
+    mapPerson() {
+        this.#content = this.#content.map(line => new Person(line))
         return this
     }
 

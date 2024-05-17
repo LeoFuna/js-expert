@@ -17,7 +17,7 @@ describe('Util', () => {
     it ('#evaluateRegex should return the regex if it is safe', () => {
         const safeRegex = /^([a-z])$/
 
-        expect(() => evaluateRegex(safeRegex)).not.to.throw
+        expect(() => evaluateRegex(safeRegex)).not.to.throw()
         const result = evaluateRegex(safeRegex);
 
         expect(result).to.be.equal(safeRegex);
