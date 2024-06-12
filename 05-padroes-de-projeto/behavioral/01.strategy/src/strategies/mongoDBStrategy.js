@@ -1,0 +1,29 @@
+import knex from "knex";
+import MongoDB from "mongodb";
+
+export default class MongoDBStrategy {
+    #instance
+    constructor(connectionString) {
+        const { pathname: dbName } = new URL(connectionString);
+        this.connectionString = connectionString.replace(dbName, '');
+        this.db = dbName.replace('/', '');
+        this.collection = "warriors"; // nao é uma boa prática mas para o exemplo serve
+    }
+
+    async connect() {
+        const client = new MongoDB.MongoClient(this.connectionString);
+
+        await client.connect();
+        const db = client.db(this.db).collection(this.collection);
+        this.#instance = db;
+        
+    }
+
+    async create(item) {
+        return this.#instance.insertOne(item);
+    }
+
+    async read(item) {
+        return this.#instance.find(item).toArray();
+    }
+}
