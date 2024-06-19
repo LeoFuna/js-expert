@@ -1,0 +1,21 @@
+{
+  "name": "app-performance-monitor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:agent": "DEBUG=agent:* nodemon --exec node --experimental-json-modules test/**.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "debug": "^4.3.5",
+    "uuid": "^8.3.2"
+  }
+}
