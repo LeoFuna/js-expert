@@ -5,6 +5,8 @@ import { Server } from 'http'
 import assert from 'node:assert';
 import nodeTest from 'node:test';
 import { start as InjectMiddleware } from '../agent/agent.js';
+import { resolve } from 'path';
+import { readdir } from 'fs/promises';
 
 const tracker = nodeTest.mock.fn();
 
@@ -43,3 +45,22 @@ const serverInstance = new Server();
     assert.deepEqual(request.user.name, user.name);
     assert.deepEqual(tracker.mock.calls.length, expectedCallCount);
 }
+
+{
+    const reportsFolder = `${resolve()}/reports`
+    const dirBefore = await readdir(reportsFolder)
+
+    const { headers, user, ...requestData } = request
+    const messageError = "Cannot read property 'x-app-id' of undefined"
+
+    process.on('uncaughtException', async (err) => {
+        if (!(!!~err.message.indexOf(messageError))) {
+            return log(err);
+        }
+        const dirAfter = await readdir(reportsFolder) 
+        assert.notEqual(dirBefore.length, dirAfter.length) 
+    });
+    serverInstance.emit(eventName, requestData, response)
+}
+
+process.on('exit', () => tracker.verify());

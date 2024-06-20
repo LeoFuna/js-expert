@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18.17"
+  },
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:agent": "DEBUG=agent:* nodemon --exec node --experimental-json-modules test/**.test.js"
+    "test:agent": "mkdir -p reports && DEBUG=agent:* nodemon --exec node --experimental-json-modules test/**.test.js",
+    "start": "DEBUG=app:* nodemon --exec node --experimental-json-modules api/index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "reports*"
+    ]
   },
   "keywords": [],
   "author": "",
