@@ -1,0 +1,16 @@
+Entrei aqui utilizando node inspect nomeDoArquivo.mjs
+Salvei tudo no debug.log com .save debug.log
+list(100)
+setBreakpoint(11)
+cont
+exec req
+exec req.url
+exec new URLSearchParams(req.url)
+exec new URLSearchParams(req.url).get('salary')
+exec new URLSearchParams(req.url).get('discount')
+exec new URLSearchParams(req.url).get('/salary')
+exec new URLSearchParams(req.url).get('/?salary')
+
+repl // para entrar no modo REPL
+
+exec // para executar o comando, é possível ver o dado de uma variável
