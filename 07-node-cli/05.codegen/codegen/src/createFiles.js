@@ -23,13 +23,15 @@ export async function createFiles({ mainPath, defaultMainFolder, layers, compone
     const pendingFilesToWrite = []
 
     for(const layer of layers) {
-        if(!keys.includes(layer)) {
+        const layerTemplate = `${layer}Template`;
+        if(!keys.includes(layerTemplate)) {
             return { error: 'the chosen layer doesnt has a template' }
         }
-        const template = templates[layer]; 
+        const template = templates[layerTemplate]; 
         const targetFolder = `${mainPath}/${defaultMainFolder}/${layer}`;
         const dependencies = defaultDependencies(layer, componentName);
-        const  { fileName, template: txtFile } = template(componentName, ...dependencies);
+        const { fileName, template: txtFile } = template(componentName, ...dependencies);
+        
         const targetFileName = `${targetFolder}/${Util.lowerCaseFirstLetter(fileName)}.js`;
 
         pendingFilesToWrite.push({ targetFileName, txtFile });

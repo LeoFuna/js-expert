@@ -10,6 +10,7 @@ export default class Util {
 
     static lowerCaseFirstLetter(str) {
         if (!str) return '';
-        return this.#transform({ str, upperCase: false });
+        
+        return Util.#transform({ str, upperCase: false });
     }
 }
