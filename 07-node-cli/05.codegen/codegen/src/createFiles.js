@@ -7,7 +7,7 @@ const defaultDependencies = (layer, componentName) => {
     const dependencies = {
         repository: [],
         service: [`${componentName}Repository`],
-        factory: [`${componentName}Repository`, `${componentName}Service`],
+        factory: [`${componentName}Service`, `${componentName}Repository`],
     }
 
     return dependencies[layer].map(Util.lowerCaseFirstLetter);

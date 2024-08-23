@@ -74,6 +74,6 @@ describe('#Layers - Files Structure', () => {
         const result = await createFiles(myConfig);
         expect(result).toStrictEqual(expected);
         expect(fsPromises.writeFile).toHaveBeenCalledTimes(myConfig.layers.length);
-        expect(templates.factoryTemplate).toHaveBeenCalledWith(myConfig.componentName, repositoryLayer, serviceLayer)
+        expect(templates.factoryTemplate).toHaveBeenCalledWith(myConfig.componentName, serviceLayer, repositoryLayer)
     });
 })
