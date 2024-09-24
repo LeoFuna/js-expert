@@ -1,0 +1,1 @@
+[Artigo sobre fazer nodejs e clusters para aumentar capacidade de processamento](https://bhattaraib58.medium.com/make-nodejs-handle-5x-request-with-99-9-uptime-adding-10-lines-of-code-e264006d35cf)
