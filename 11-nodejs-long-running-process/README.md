@@ -12,6 +12,9 @@ Geralmente são usadas para tudo que for assíncrono, como um agendamento de uma
 
 Já as Worker Threads são threads agendadas pelo seu programa, que é o processo pai, usadas para executar tarefas que demandam processamento em memória, o que chamamos de CPU-intensive operations. 
 
+## Ferramentas
+- HTOP = instalada para olhar no terminal processos de maneira mais interativa
+
 ## Links úteis
 
 https://afteracademy.com/blog/what-is-a-process-in-operating-system-and-what-are-the-different-states-of-a-process
