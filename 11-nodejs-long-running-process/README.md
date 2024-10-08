@@ -1,5 +1,5 @@
 ### Processo
-É um programa que tem fatia de memoria reservada, faz chamada ao OS para sobreviver e podem ter uma seria de threads.
+É um programa que tem fatia de memoria reservada, faz chamada ao OS para sobreviver e podem ter uma seria de threads. São ótimos para IO
 
 ## Thread
 Uma thread é uma ou mais pequenas unidades de processamento dentro de um processo, compartilham memória e são geralmente usadas para executar uma tarefa e morrer em seguida. 
